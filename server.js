@@ -7,21 +7,21 @@ var querystring = require('querystring');
 var fs = require('fs');
 
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-var port = process.env.PORT || config.port;
+var port = process.env.PORT;
 
 http.createServer(function (request, response) {
     'use strict';
 
     var data = querystring.stringify({
         'grant_type': 'authorization_code',
-        'client_id':  config.id,
-        'client_secret': config.secret,
+        'client_id':  process.env.CLIENT_ID,
+        'client_secret': process.env.CLIENT_SECRET,
         'code': url.parse(request.url, true).query.code
     });
 
     var options = {
-        'hostname': config.host,
-        'path': config.path,
+        'hostname': 'm.hh.ru',
+        'path': '/oauth/token',
         'method': 'POST',
         'headers': {
             'Content-Length': data.length,
