@@ -4,10 +4,6 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
-var fs = require('fs');
-
-var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-var port = process.env.PORT;
 
 http.createServer(function (request, response) {
     'use strict';
@@ -41,6 +37,4 @@ http.createServer(function (request, response) {
     });
     tokenRequest.write(data);
     tokenRequest.end();
-}).listen(port);
-
-console.log('server running on', port);
+}).listen(process.env.PORT);
